@@ -75,7 +75,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-r from-blue-400 to-blue-600 text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-r from-blue-400 to-blue-600 text-white">
       <div className="relative mb-8">
         <Image
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
@@ -87,37 +87,37 @@ export default function Home() {
         />
       </div>
 
-      <div className="flex w-full max-w-6xl">
-        <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg mr-4 flex flex-col h-[calc(100vh-3rem)]">
-          <div className="sticky top-0 bg-blue-800 p-4 z-10">
-            <h2 className="text-2xl font-bold mb-4">News</h2>
-            <input
-              type="text"
-              value={newsQuery}
-              onChange={(e) => setNewsQuery(e.target.value)}
-              className="p-2 border border-gray-200 rounded-md text-black w-full"
-              placeholder="Search news..."
-            />
-          </div>
-          <div className="flex-1 overflow-y-auto mt-4">
-            {news.length > 0 ? (
-              <ul className="space-y-4">
-                {news.slice(0, 12).map((article: any, index: number) => (
-                  <li key={index} className="bg-blue-700 p-4 rounded-md">
-                    <h3 className="text-xl font-semibold">{article.title}</h3>
-                    <p>{article.description}</p>
-                    <a href={article.url} target="_blank" className="text-blue-300 underline">Read more</a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-lg">No news available</p>
-            )}
-          </div>
+      <div className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
+        {/* Pinned Locations Section */}
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-center">Pinned Locations</h2>
+          {pinnedLocations.length > 0 ? (
+            <ul className="space-y-4">
+              {pinnedLocations.map((location, index) => (
+                <li key={index} className="bg-blue-700 p-4 rounded-md flex justify-between items-center">
+                  <div>
+                    <h3 className="text-xl font-semibold">{location.weather.name}</h3>
+                    <p>{location.weather.weather[0].description}</p>
+                    <p>Temp: {location.weather.main.temp}°C</p>
+                    <p>Humidity: {location.weather.main.humidity}%</p>
+                  </div>
+                  <button
+                    onClick={() => removePinnedLocation(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded-md text-xs"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-lg text-center">No pinned locations</p>
+          )}
         </div>
 
-        <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg mx-4">
-          <h1 className="text-4xl font-bold mb-4">Weather App</h1>
+        {/* Weather Section */}
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold mb-4 text-center">Weather App</h1>
           <input
             type="text"
             value={city}
@@ -141,7 +141,7 @@ export default function Home() {
           )}
           {forecast && (
             <div className="text-lg mt-4">
-              <h3 className="text-2xl font-semibold mb-2">3-Hour Forecast</h3>
+              <h3 className="text-xl font-semibold mb-2">3-Hour Forecast</h3>
               <ul className="space-y-2">
                 {forecast.list.slice(0, 5).map((entry: any, index: number) => (
                   <li key={index} className="bg-blue-700 p-3 rounded-md">
@@ -155,39 +155,40 @@ export default function Home() {
           )}
           {airPollution && (
             <div className="text-lg mt-4">
-              <h3 className="text-2xl font-semibold mb-2">Air Pollution</h3>
+              <h3 className="text-xl font-semibold mb-2">Air Pollution</h3>
               <p>PM2.5: {airPollution.list[0].components.pm2_5} µg/m³</p>
               <p>PM10: {airPollution.list[0].components.pm10} µg/m³</p>
               <p>CO: {airPollution.list[0].components.co} µg/m³</p>
             </div>
           )}
-          {error && <p className="mt-4 text-red-400">{error}</p>}
+          {error && <p className="mt-4 text-red-400 text-center">{error}</p>}
         </div>
 
-        <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg ml-4">
-          <h2 className="text-2xl font-bold mb-4">Pinned Locations</h2>
-          {pinnedLocations.length > 0 ? (
-            <ul className="space-y-4">
-              {pinnedLocations.map((location, index) => (
-                <li key={index} className="bg-blue-700 p-4 rounded-md flex justify-between items-center">
-                  <div>
-                    <h3 className="text-xl font-semibold">{location.weather.name}</h3>
-                    <p>{location.weather.weather[0].description}</p>
-                    <p>Temp: {location.weather.main.temp}°C</p>
-                    <p>Humidity: {location.weather.main.humidity}%</p>
-                  </div>
-                  <button
-                    onClick={() => removePinnedLocation(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded-md"
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-lg">No pinned locations</p>
-          )}
+        {/* News Section */}
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-center">News</h2>
+          <input
+            type="text"
+            value={newsQuery}
+            onChange={(e) => setNewsQuery(e.target.value)}
+            className="p-2 border border-gray-200 rounded-md text-black w-full mb-4"
+            placeholder="Search news..."
+          />
+          <div className="flex-1 overflow-y-auto">
+            {news.length > 0 ? (
+              <ul className="space-y-4">
+                {news.slice(0, 12).map((article: any, index: number) => (
+                  <li key={index} className="bg-blue-700 p-4 rounded-md">
+                    <h3 className="text-xl font-semibold">{article.title}</h3>
+                    <p>{article.description}</p>
+                    <a href={article.url} target="_blank" className="text-blue-300 underline text-sm">Read more</a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-lg text-center">No news available</p>
+            )}
+          </div>
         </div>
       </div>
     </main>
