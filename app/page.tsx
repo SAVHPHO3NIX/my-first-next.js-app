@@ -88,10 +88,10 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
-        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg flex flex-col h-[calc(100vh-6rem)]">
           <h2 className="text-2xl font-bold mb-4 text-center">Pinned Locations</h2>
           {pinnedLocations.length > 0 ? (
-            <ul className="space-y-4">
+            <ul className="space-y-4 overflow-y-auto flex-1">
               {pinnedLocations.map((location, index) => (
                 <li key={index} className="bg-blue-700 p-4 rounded-md flex justify-between items-center">
                   <div>
@@ -162,19 +162,21 @@ export default function Home() {
           {error && <p className="mt-4 text-red-400 text-center">{error}</p>}
         </div>
 
-        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold mb-4 text-center">News</h2>
-          <input
-            type="text"
-            value={newsQuery}
-            onChange={(e) => setNewsQuery(e.target.value)}
-            className="p-2 border border-gray-200 rounded-md text-black w-full mb-4"
-            placeholder="Search news..."
-          />
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg flex flex-col h-[calc(100vh-6rem)]">
+          <div className="sticky top-0 bg-blue-800 p-4 z-10">
+            <h2 className="text-2xl font-bold mb-4 text-center">News</h2>
+            <input
+              type="text"
+              value={newsQuery}
+              onChange={(e) => setNewsQuery(e.target.value)}
+              className="p-2 border border-gray-200 rounded-md text-black w-full mb-4"
+              placeholder="Search news..."
+            />
+          </div>
           <div className="flex-1 overflow-y-auto">
             {news.length > 0 ? (
               <ul className="space-y-4">
-                {news.slice(0, 12).map((article: any, index: number) => (
+                {news.map((article: any, index: number) => (
                   <li key={index} className="bg-blue-700 p-4 rounded-md">
                     <h3 className="text-xl font-semibold">{article.title}</h3>
                     <p>{article.description}</p>
