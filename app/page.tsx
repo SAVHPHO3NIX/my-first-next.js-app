@@ -88,7 +88,6 @@ export default function Home() {
       </div>
 
       <div className="flex w-full max-w-6xl">
-        {/* Left Section - News */}
         <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg mr-4 flex flex-col h-[calc(100vh-3rem)]">
           <div className="sticky top-0 bg-blue-800 p-4 z-10">
             <h2 className="text-2xl font-bold mb-4">News</h2>
@@ -103,7 +102,7 @@ export default function Home() {
           <div className="flex-1 overflow-y-auto mt-4">
             {news.length > 0 ? (
               <ul className="space-y-4">
-                {news.slice(0, 10).map((article: any, index: number) => (
+                {news.slice(0, 12).map((article: any, index: number) => (
                   <li key={index} className="bg-blue-700 p-4 rounded-md">
                     <h3 className="text-xl font-semibold">{article.title}</h3>
                     <p>{article.description}</p>
@@ -117,7 +116,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Middle Section - Weather */}
         <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg mx-4">
           <h1 className="text-4xl font-bold mb-4">Weather App</h1>
           <input
@@ -166,7 +164,6 @@ export default function Home() {
           {error && <p className="mt-4 text-red-400">{error}</p>}
         </div>
 
-        {/* Right Section - Pinned Locations */}
         <div className="w-1/3 bg-blue-800 p-6 rounded-lg shadow-lg ml-4">
           <h2 className="text-2xl font-bold mb-4">Pinned Locations</h2>
           {pinnedLocations.length > 0 ? (
