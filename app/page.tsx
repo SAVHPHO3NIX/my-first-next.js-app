@@ -63,7 +63,7 @@ export default function Home() {
   }, [newsQuery]);
 
   const pinLocation = () => {
-    if (pinnedLocations.length < 4 && weather) {
+    if (pinnedLocations.length < 7 && weather) {
       setPinnedLocations([...pinnedLocations, { weather }]);
     }
   };
@@ -88,7 +88,6 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
-        {/* Pinned Locations Section */}
         <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-4 text-center">Pinned Locations</h2>
           {pinnedLocations.length > 0 ? (
@@ -115,7 +114,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Weather Section */}
         <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold mb-4 text-center">Weather App</h1>
           <input
@@ -164,7 +162,6 @@ export default function Home() {
           {error && <p className="mt-4 text-red-400 text-center">{error}</p>}
         </div>
 
-        {/* News Section */}
         <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-4 text-center">News</h2>
           <input
