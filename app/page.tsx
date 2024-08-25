@@ -88,32 +88,6 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
-        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg flex flex-col h-[calc(100vh-6rem)]">
-          <h2 className="text-2xl font-bold mb-4 text-center">Pinned Locations</h2>
-          {pinnedLocations.length > 0 ? (
-            <ul className="space-y-4 overflow-y-auto flex-1">
-              {pinnedLocations.map((location, index) => (
-                <li key={index} className="bg-blue-700 p-4 rounded-md flex justify-between items-center">
-                  <div>
-                    <h3 className="text-xl font-semibold">{location.weather.name}</h3>
-                    <p>{location.weather.weather[0].description}</p>
-                    <p>Temp: {location.weather.main.temp}°C</p>
-                    <p>Humidity: {location.weather.main.humidity}%</p>
-                  </div>
-                  <button
-                    onClick={() => removePinnedLocation(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded-md text-xs"
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-lg text-center">No pinned locations</p>
-          )}
-        </div>
-
         <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold mb-4 text-center">Weather App</h1>
           <input
@@ -160,6 +134,32 @@ export default function Home() {
             </div>
           )}
           {error && <p className="mt-4 text-red-400 text-center">{error}</p>}
+        </div>
+
+        <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg flex flex-col h-[calc(100vh-6rem)]">
+          <h2 className="text-2xl font-bold mb-4 text-center">Pinned Locations</h2>
+          {pinnedLocations.length > 0 ? (
+            <ul className="space-y-4 overflow-y-auto flex-1">
+              {pinnedLocations.map((location, index) => (
+                <li key={index} className="bg-blue-700 p-4 rounded-md flex justify-between items-center">
+                  <div>
+                    <h3 className="text-xl font-semibold">{location.weather.name}</h3>
+                    <p>{location.weather.weather[0].description}</p>
+                    <p>Temp: {location.weather.main.temp}°C</p>
+                    <p>Humidity: {location.weather.main.humidity}%</p>
+                  </div>
+                  <button
+                    onClick={() => removePinnedLocation(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded-md text-xs"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-lg text-center">No pinned locations</p>
+          )}
         </div>
 
         <div className="w-full md:w-1/3 bg-blue-800 p-4 rounded-lg shadow-lg flex flex-col h-[calc(100vh-6rem)]">
